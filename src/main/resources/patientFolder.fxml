@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaFx.AppGUIController">
+    <children>
+        <Label layoutX="30.0" layoutY="20.0" prefHeight="27.0" prefWidth="103.0" text="Name:" textAlignment="CENTER" />
+        <Label layoutX="30.0" layoutY="50.0" prefHeight="17.0" prefWidth="60.0" text="CPR-nr:" />
+        <Label layoutX="479.0" layoutY="6.0" text="Date: XX/XX/XXXX" />
+        <Button layoutX="30.0" layoutY="150.0" mnemonicParsing="false" onAction="#temp" prefHeight="30.0" prefWidth="150.0" text="Temperature" />
+        <Button layoutX="14.0" layoutY="359.0" mnemonicParsing="false" onAction="#search" text="Back" />
+      <Label fx:id="tempLabel" layoutX="220.0" layoutY="150.0" prefHeight="30.0" prefWidth="150.0" text="temp" textAlignment="CENTER" />
+    </children>
+</AnchorPane>
