@@ -33,7 +33,7 @@ public class AppGUIController implements tempListener {
             public void run() {
                 tempLabel.setText(String.valueOf(tempDTO.getTemp()));
                 String text = TempDataOutput.getText();
-                text += "New Data! Temp:" + tempDTO.getTemp()+ " °C"+", TimeStamp: " + tempDTO.getTid() + "\r\n";
+                text += "New Data! Temp:" + tempDTO.getTemp() +" °C" + ", TimeStamp: " + tempDTO.getTid() + "\r\n";
                 TempDataOutput.setText(text);
             }
         });

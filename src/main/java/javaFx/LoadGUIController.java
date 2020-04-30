@@ -29,7 +29,7 @@ public class LoadGUIController {
         List<TempDTO> tempData = tempDAO.load(id);
         String text = "";
         for (TempDTO data : tempData) {
-            text += "ID: " + data.getId() + ", Time: " + data.getTid() + ", Temperature: " + data.getTemp() +" °C"+ "\r\n";
+            text += "ID: " + data.getId() + ", Time: " + data.getTid() + ", Temperature: " + data.getTemp() + " °C" + "\r\n";
         }
         TempLoad.setText(text);
         System.out.println("Oraale");
