@@ -6,23 +6,14 @@ public class TempDTO {
 
     private double temp;
     private Timestamp tid;
-    private String cpr;
+    private int id;
 
-    public TempDTO() {
-
+    public int getId() {
+        return id;
     }
 
-    public TempDTO(double temp, Timestamp tid) {
-        this.temp = temp;
-        this.tid = tid;
-    }
-
-    public String getCpr() {
-        return cpr;
-    }
-
-    public void setCpr(String cpr) {
-        this.cpr = cpr;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public double getTemp() {

@@ -8,37 +8,35 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sensor.*;
 import database.*;
 
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.Date;
-import java.util.Scanner;
 
 public class AppGUIController implements tempListener {
 
     public Button sB;
     public Button login2;
     public Button back;
+    public Button load;
     public Label tempLabel;
+    public TextField cpr;
+    public TextArea TempDataOutput;
 
     public TempDAO tempDAO = new TempDAOImpl();
-    public TempDTO tempDTO = new TempDTO();
-    public TextField cpr;
 
-    public void inform(final double temp) {
-
-        Scanner scanner = new Scanner(System.in);
-        String cpr = scanner.next();
-        tempDTO.setCpr(cpr);
-        tempDTO.setTid(new Timestamp());
-        tempDAO.save(new TempDTO(temp, new Date().toString()));
+    public void inform(final TempDTO tempDTO) {
         Platform.runLater(new Runnable() {
             public void run() {
-                tempLabel.setText(String.valueOf(temp));
+                tempLabel.setText(String.valueOf(tempDTO.getTemp()));
+                String text = TempDataOutput.getText();
+                text += "New Data! Temp:" + tempDTO.getTemp() + ", TimeStamp: " + tempDTO.getTid() + "\r\n";
+                TempDataOutput.setText(text);
+                tempDTO.setId(Integer.parseInt(cpr.getText()));
+                tempDAO.save(tempDTO);
             }
         });
     }
@@ -46,7 +44,7 @@ public class AppGUIController implements tempListener {
     public void temp(ActionEvent actionEvent) {
         Sensor sensor = new Sensor();
         new Thread(sensor).start();
-        sensor.registerObserver(this);
+        sensor.register(this);
     }
 
     public void SPressed(ActionEvent actionEvent) throws IOException {
@@ -55,15 +53,6 @@ public class AppGUIController implements tempListener {
         Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         primaryStage.setScene(secondScene);
         primaryStage.setTitle("Nem-id");
-        primaryStage.show();
-    }
-
-    public void search(ActionEvent actionEvent) throws IOException {
-        Parent theardPaneLoader = FXMLLoader.load(getClass().getResource("/searchD.fxml"));
-        Scene theardScene = new Scene(theardPaneLoader);
-        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        primaryStage.setScene(theardScene);
-        primaryStage.setTitle("Search");
         primaryStage.show();
     }
 
@@ -82,6 +71,15 @@ public class AppGUIController implements tempListener {
         Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         primaryStage.setScene(firstScene);
         primaryStage.setTitle("Welcome to Diagnomonic platform");
+        primaryStage.show();
+    }
+
+    public void load(ActionEvent actionEvent) throws IOException {
+        Parent fifthPaneLoader = FXMLLoader.load(getClass().getResource("/Load.fxml"));
+        Scene fifthScene = new Scene(fifthPaneLoader);
+        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        primaryStage.setScene(fifthScene);
+        primaryStage.setTitle("Data Base");
         primaryStage.show();
     }
 }

@@ -1,43 +1,44 @@
 package database;
 
 import java.sql.*;
+import java.util.List;
+import java.util.ArrayList;
 
 public class TempDAOImpl implements TempDAO {
 
-    Connection conn = connector.getConn();
-
-    public String save(TempDTO tempDTO) {
-
+    public void save(TempDTO tempDTO) {
+        Connection conn = connector.getConn();
         try {
             PreparedStatement statement = conn.prepareStatement("INSERT INTO Målinger (ID,Temp,Tid) values (?,?,?)");
-            statement.setString(1, tempDTO.getCpr());
+            statement.setInt(1, tempDTO.getId());
             statement.setDouble(2, tempDTO.getTemp());
             statement.setTimestamp(3, tempDTO.getTid());
             System.out.println("Connection established");
             statement.execute();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
     }
 
-    public TempDTO load(TempDTO tempDTO) {
-
+    public List<TempDTO> load(int id) {
+        List<TempDTO> data = new ArrayList<TempDTO>();
+        Connection conn = connector.getConn();
         try {
-            Statement statement = conn.createStatement();
-            ResultSet show_tables = statement.executeQuery("SELECT Temp FROM Målinger");
-            TempDTO TempDTO = new TempDTO();
-            while (show_tables.next()) {
-                TempDTO.setTemp(show_tables.getDouble("Temp"));
+            PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM Målinger WHERE id = ? ");
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                TempDTO tempDTO = new TempDTO();
+                tempDTO.setId(resultSet.getInt("ID"));
+                tempDTO.setTemp(resultSet.getDouble("Temp"));
+                tempDTO.setTid(resultSet.getTimestamp("Tid"));
+                data.add(tempDTO);
             }
-            return TempDTO;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return data;
     }
-
 }
 
 

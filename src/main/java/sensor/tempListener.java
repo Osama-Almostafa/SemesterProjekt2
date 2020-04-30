@@ -1,5 +1,7 @@
 package sensor;
 
+import database.TempDTO;
+
 public interface tempListener {
-    void inform(double temp);
+    void inform(TempDTO tempDTO);
 }

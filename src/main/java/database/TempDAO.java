@@ -1,10 +1,12 @@
 package database;
 
+import java.util.List;
+
 public interface TempDAO {
 
-    String save(TempDTO tempDTO);
+    void save(TempDTO tempDTO);
 
-    TempDTO load(TempDTO tempDTO);
+    List<TempDTO> load(int id);
 }
 
 
