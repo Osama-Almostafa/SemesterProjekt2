@@ -13,8 +13,8 @@ public class TempDAOImpl implements TempDAO {
             statement.setInt(1, tempDTO.getId());
             statement.setDouble(2, tempDTO.getTemp());
             statement.setTimestamp(3, tempDTO.getTid());
-            System.out.println("Connection established");
             statement.execute();
+            System.out.println("Saveing to database!!");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -33,6 +33,7 @@ public class TempDAOImpl implements TempDAO {
                 tempDTO.setTemp(resultSet.getDouble("Temp"));
                 tempDTO.setTid(resultSet.getTimestamp("Tid"));
                 data.add(tempDTO);
+                System.out.println("Loadind from database!!");
             }
         } catch (SQLException e) {
             e.printStackTrace();

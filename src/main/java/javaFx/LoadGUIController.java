@@ -32,7 +32,6 @@ public class LoadGUIController {
             text += "ID: " + data.getId() + ", Time: " + data.getTid() + ", Temperature: " + data.getTemp() + " °C" + "\r\n";
         }
         TempLoad.setText(text);
-        System.out.println("Oraale");
     }
 
     public void patientFolder(ActionEvent actionEvent) throws IOException {
