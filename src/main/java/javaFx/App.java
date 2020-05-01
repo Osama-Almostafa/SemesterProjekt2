@@ -2,6 +2,7 @@ package javaFx;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -16,8 +17,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/login1.fxml"));
-        primaryStage.setScene(new Scene((Parent) loader.load()));
+        Parent secondPaneLoader = FXMLLoader.load(getClass().getResource("/logIn.fxml"));
+        Scene secondScene = new Scene(secondPaneLoader);
+        primaryStage.setScene(secondScene);
         primaryStage.setTitle("Welcome to Diagnomonic platform");
         primaryStage.show();
     }

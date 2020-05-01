@@ -18,9 +18,7 @@ import java.io.IOException;
 
 public class AppGUIController implements tempListener {
 
-    public Button sB;
-    public Button login2;
-    public Button back;
+    public Button logIn;
     public Button load;
     public Label tempLabel;
     public TextField cpr;
@@ -51,11 +49,11 @@ public class AppGUIController implements tempListener {
     }
 
     public void SPressed(ActionEvent actionEvent) throws IOException {
-        Parent secondPaneLoader = FXMLLoader.load(getClass().getResource("/logIn2.fxml"));
+        Parent secondPaneLoader = FXMLLoader.load(getClass().getResource("/logIn.fxml"));
         Scene secondScene = new Scene(secondPaneLoader);
         Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         primaryStage.setScene(secondScene);
-        primaryStage.setTitle("Nem-id");
+        primaryStage.setTitle("Welcome to Diagnomonic platformd");
         primaryStage.show();
     }
 
@@ -65,15 +63,6 @@ public class AppGUIController implements tempListener {
         Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         primaryStage.setScene(fourthScene);
         primaryStage.setTitle("Patient's folder");
-        primaryStage.show();
-    }
-
-    public void back(ActionEvent actionEvent) throws IOException {
-        Parent firstPaneLoader = FXMLLoader.load(getClass().getResource("/logIn1.fxml"));
-        Scene firstScene = new Scene(firstPaneLoader);
-        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        primaryStage.setScene(firstScene);
-        primaryStage.setTitle("Welcome to Diagnomonic platform");
         primaryStage.show();
     }
 
