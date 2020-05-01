@@ -1,6 +1,6 @@
 package javaFx;
 
-import database.*;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import database.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,14 +18,13 @@ import java.util.List;
 public class LoadGUIController {
 
     public Button søg;
+    public Button back;
     public TextField idField;
     public TextArea TempLoad;
-    public Button back;
 
     public void LoadData(ActionEvent actionEvent) {
 
-        int id;
-        id = Integer.parseInt(idField.getText());
+        int id = Integer.parseInt(idField.getText());
         TempDAO tempDAO = new TempDAOImpl();
         List<TempDTO> tempData = tempDAO.load(id);
         String text = "";
@@ -36,10 +36,10 @@ public class LoadGUIController {
     }
 
     public void patientFolder(ActionEvent actionEvent) throws IOException {
-        Parent fourthPaneLoader = FXMLLoader.load(getClass().getResource("/patientFolder.fxml"));
-        Scene fourthScene = new Scene(fourthPaneLoader);
+        Parent secondPaneLoader = FXMLLoader.load(getClass().getResource("/patientFolder.fxml"));
+        Scene secondScene = new Scene(secondPaneLoader);
         Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        primaryStage.setScene(fourthScene);
+        primaryStage.setScene(secondScene);
         primaryStage.setTitle("Patient's folder");
         primaryStage.show();
     }
