@@ -17,7 +17,7 @@ public class TempDAOImpl implements TempDAO { // her oprettes klassen som implem
             statement.setDouble(2, tempDTO.getTemp()); // =/=
             statement.setTimestamp(3, tempDTO.getTid()); // =/=
             statement.execute(); // her udføres alle de forrige statements
-            System.out.println("Saveing to database!!"); // printer hvis data bliver gemt
+            System.out.println("Saved to database!!"); // printer hvis data bliver gemt
         } catch (SQLException e) { // fanger fejl hvis data ikke bliver gemt fordi der er I/O
             e.printStackTrace();
         }
@@ -41,7 +41,7 @@ public class TempDAOImpl implements TempDAO { // her oprettes klassen som implem
                 tempDTO.setTemp(resultSet.getDouble("Temp")); // =/=
                 tempDTO.setTid(resultSet.getTimestamp("Tid")); // =/=
                 data.add(tempDTO); // Her kommer nye TempDTO'er i listen
-                System.out.println("Loadind from database!!");
+                System.out.println("Loaded from database!!");
             }
         } catch (SQLException e) {
             e.printStackTrace();
