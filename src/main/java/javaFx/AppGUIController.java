@@ -18,37 +18,39 @@ import java.io.IOException;
 
 public class AppGUIController implements tempListener {
 
-    public Button logIn;
+    public Button logIn; // referenser til controllers fra FXML-filen
     public Button load;
     public Label tempLabel;
     public TextField id;
     public TextArea TempDataOutput;
 
-    public TempDAO tempDAO = new TempDAOImpl();
+    public TempDAO tempDAO = new TempDAOImpl(); // opretter en objekt af klaseem TempDAO
 
-    public void inform(final TempDTO tempDTO) {
-        Platform.runLater(new Runnable() {
+    public void inform(final TempDTO tempDTO) { // Her implemeteres interfacens metode
+        Platform.runLater(new Runnable() { // her bliver der udskrevet løbende temperatur og tid til
+            // graiskbrugergrænseflade hvis der er værdier fra sensoren + gemme data i databasen.
             public void run() {
-                tempLabel.setText(String.valueOf(tempDTO.getTemp()));
+                tempLabel.setText(String.valueOf(tempDTO.getTemp())); // her bliver værdien angivet som hentes fra DTO
                 String text = TempDataOutput.getText();
                 text += "New Data! Temp:" + tempDTO.getTemp() + " °C" + ", TimeStamp: " + tempDTO.getTid() + "\r\n";
-                TempDataOutput.setText(text);
+                TempDataOutput.setText(text); // her bliver der oprettet en variabel/text, og tildeles hvad der skal stå
+                // i text area
             }
         });
-        TempDTO saveDTO = new TempDTO();
-        saveDTO.setId(Integer.parseInt(id.getText()));
-        saveDTO.setTemp(tempDTO.getTemp());
-        saveDTO.setTid(tempDTO.getTid());
-        tempDAO.save(saveDTO);
+        TempDTO saveDTO = new TempDTO(); // der laves en ny objekt af klassen TempDTO
+        saveDTO.setId(Integer.parseInt(id.getText())); // værdien fra ID/textField sættes ind i setID
+        saveDTO.setTemp(tempDTO.getTemp());// Temperatur
+        saveDTO.setTid(tempDTO.getTid()); // Tid
+        tempDAO.save(saveDTO); // her gemmes der værdier fra TempDTO
     }
 
-    public void temp(ActionEvent actionEvent) {
-        Sensor sensor = new Sensor();
-        new Thread(sensor).start();
-        sensor.register(this);
+    public void temp(ActionEvent actionEvent) { // Event Driving Programming
+        Sensor sensor = new Sensor(); // her oprettes en ny objekt af klassen sensor
+        new Thread(sensor).start(); // en ny tråd sættes igang
+        sensor.register(this); // AppGUIcontroller registrerer sig som listener(observere) i sensoren
     }
 
-    public void back(ActionEvent actionEvent) throws IOException {
+    public void back(ActionEvent actionEvent) throws IOException { // Event Driving Programming som skifter mellem scene
         Parent firstPaneLoader = FXMLLoader.load(getClass().getResource("/logIn.fxml"));
         Scene firstScene = new Scene(firstPaneLoader);
         Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -57,7 +59,8 @@ public class AppGUIController implements tempListener {
         primaryStage.show();
     }
 
-    public void patientFolder(ActionEvent actionEvent) throws IOException {
+    public void patientFolder(ActionEvent actionEvent) throws IOException { //  Event Driving Programming,
+        // som skifter mellem scene
         Parent secondPaneLoader = FXMLLoader.load(getClass().getResource("/patientFolder.fxml"));
         Scene secondScene = new Scene(secondPaneLoader);
         Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -75,7 +78,6 @@ public class AppGUIController implements tempListener {
         primaryStage.show();
     }
 }
-
 
 
 
