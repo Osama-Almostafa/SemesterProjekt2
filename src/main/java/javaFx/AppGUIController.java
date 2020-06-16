@@ -1,5 +1,8 @@
 package javaFx;
 
+import database.TempDAO;
+import database.TempDAOImpl;
+import database.TempDTO;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -11,8 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import sensor.*;
-import database.*;
+import sensor.Sensor;
+import sensor.tempListener;
 
 import java.io.IOException;
 

@@ -1,6 +1,6 @@
 package database; // bibliotek
 
-import java.sql.Connection; // interfacet som bliver anvendt
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 

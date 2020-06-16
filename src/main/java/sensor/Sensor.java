@@ -1,7 +1,7 @@
 package sensor;
 
 import database.TempDTO;
-import javaFx.*;
+import javaFx.AppGUIController;
 
 import java.sql.Timestamp;
 
